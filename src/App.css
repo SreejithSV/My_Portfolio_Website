@@ -39,6 +39,7 @@ body{
   height: 100;
   border: white 2px solid;
   }
+
   html {
     scroll-behavior: smooth;
 }

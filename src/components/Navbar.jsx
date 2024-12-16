@@ -1,9 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaBars } from "react-icons/fa";
 
 const Navbar = () => {
   const[toggleMenu,setToggleMenu]=useState(false);
+  const toggleNavbar=()=>{
+    setToggleMenu(true);
+  };
+
+  useEffect(()=>{
+    if(toggleMenu){
+      const timer=setTimeout(()=>{
+        setToggleMenu(false);
+      },1000)
+    }
+  },[toggleMenu])
   return (
     <div className="flex justify-between px-5 py-2 ">
       <Link className='link' to={'/sreejith'}><a href="#" className="atag font-serif font-bold">SREEJITH  S V</a></Link>
@@ -31,17 +42,8 @@ const Navbar = () => {
         <li className='bg-black py-2 text-center'><Link className='link bg-black' to={'/contact'}><a href='#' className='atag-nav bg-black'>CONTACT</a></Link></li>
         <li className='bg-black py-2 text-center'><Link className='link bg-black' to={'/resume'}><a href='#' className='atag-nav bg-black'>RESUME</a></Link></li>
     </ul>
-    {/* <ul className="flex flex-col text-black bg-white p-yl-3 ">
-        <li className='bg-white py-2 text-center'><Link className='link bg-white' to={'*'}><a href='#' className='atag-nav bg-white'>HOME</a></Link></li>
-        <li className='bg-white py-2 text-center'><Link className='link bg-white' to={'/skills'}><a href='#' className='atag-nav bg-white'>SKILLS </a></Link></li>
-        <li className='bg-white py-2 text-center'><Link className='link bg-white' to={'/education'}><a href='#' className='atag-nav bg-white'>EDUCATION</a></Link></li>
-        <li className='bg-white py-2 text-center'><Link className='link bg-white' to={'/project'}><a href='#' className='atag-nav bg-white'>PROJECT</a></Link></li>
-        <li className='bg-white py-2 text-center'><Link className='link bg-white' to={'/about'}><a href='#' className='atag-nav bg-white'>ABOUT</a></Link></li>
-        <li className='bg-white py-2 text-center'><Link className='link bg-white' to={'/contact'}><a href='#' className='atag-nav bg-white'>CONTACT</a></Link></li>
-        <li className='bg-white py-2 text-center'><Link className='link bg-white' to={'/resume'}><a href='#' className='atag-nav bg-white'>RESUME</a></Link></li>
-    </ul> */}
     </nav>}
-    <button onClick={()=>setToggleMenu(!toggleMenu)} className='md:hidden block'><FaBars/></button>
+    <button onClick={toggleNavbar} className='md:hidden block'><FaBars/></button>
     </div>
   )
 }
