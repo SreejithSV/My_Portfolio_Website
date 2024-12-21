@@ -11,7 +11,7 @@ import Sreejith from './components/Sreejith';
 import { useEffect, useState } from 'react';
 import Skills from './components/Skills';
 function App() {
-  const [isLoading, setisLoading] = useState(true);
+  const [isLoading, seIsLoading] = useState(true);
   const [View, setView] = useState(<Sreejith />);
 
   useEffect(() => {

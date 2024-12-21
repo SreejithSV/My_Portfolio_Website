@@ -12,7 +12,7 @@ const Navbar = () => {
     if(toggleMenu){
       const timer=setTimeout(()=>{
         setToggleMenu(false);
-      },1000)
+      },2000)
     }
   },[toggleMenu])
   return (
