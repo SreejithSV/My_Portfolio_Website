@@ -12,7 +12,11 @@ const Navbar = () => {
     if(toggleMenu){
       const timer=setTimeout(()=>{
         setToggleMenu(false);
+<<<<<<< HEAD
       },2000)
+=======
+      },1000)
+>>>>>>> 628412fc260b6a99f1f198897dc504572973849a
     }
   },[toggleMenu])
   return (

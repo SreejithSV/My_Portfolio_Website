@@ -11,7 +11,11 @@ import Sreejith from './components/Sreejith';
 import { useEffect, useState } from 'react';
 import Skills from './components/Skills';
 function App() {
+<<<<<<< HEAD
   const [isLoading, seIsLoading] = useState(true);
+=======
+  const [isLoading, setisLoading] = useState(true);
+>>>>>>> 628412fc260b6a99f1f198897dc504572973849a
   const [View, setView] = useState(<Sreejith />);
 
   useEffect(() => {
