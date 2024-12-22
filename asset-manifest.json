@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/My_Portfolio_Website/static/css/main.5ce0dafa.css",
-    "main.js": "/My_Portfolio_Website/static/js/main.0892eb4e.js",
+    "main.css": "/My_Portfolio_Website/static/css/main.1f746626.css",
+    "main.js": "/My_Portfolio_Website/static/js/main.c859e1b0.js",
     "static/js/453.1407b060.chunk.js": "/My_Portfolio_Website/static/js/453.1407b060.chunk.js",
     "static/media/hero.jpg": "/My_Portfolio_Website/static/media/hero.a6606724ee2119bfec3e.jpg",
     "static/media/college.jpg": "/My_Portfolio_Website/static/media/college.20fbfaca8c0cb3829125.jpg",
@@ -10,12 +10,12 @@
     "static/media/sslc.jpg": "/My_Portfolio_Website/static/media/sslc.66b8a651d9d3d31f20eb.jpg",
     "static/media/node.jpeg": "/My_Portfolio_Website/static/media/node.6ae3c45408829ec19b77.jpeg",
     "index.html": "/My_Portfolio_Website/index.html",
-    "main.5ce0dafa.css.map": "/My_Portfolio_Website/static/css/main.5ce0dafa.css.map",
-    "main.0892eb4e.js.map": "/My_Portfolio_Website/static/js/main.0892eb4e.js.map",
+    "main.1f746626.css.map": "/My_Portfolio_Website/static/css/main.1f746626.css.map",
+    "main.c859e1b0.js.map": "/My_Portfolio_Website/static/js/main.c859e1b0.js.map",
     "453.1407b060.chunk.js.map": "/My_Portfolio_Website/static/js/453.1407b060.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5ce0dafa.css",
-    "static/js/main.0892eb4e.js"
+    "static/css/main.1f746626.css",
+    "static/js/main.c859e1b0.js"
   ]
 }
