@@ -1,9 +1,10 @@
-.skill-head{
-    width: 95%;
-    position: fixed;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
+/* ----------------- Root variables & resets ----------------- */
+@layer base {
+  :root{
     --carousel-transition-duration: 250ms;
     --carousel-transition-ease: ease-out;
     --carousel-bg-color-rgb: 0, 0, 0;
@@ -24,32 +25,33 @@
     --carousel-animation-duration: 25s;
     --carousel-animation-play-state: running;
     --carousel-direction-animation-play-state: paused;
-}
+  }
 
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    border: 0;
+  *, *::before, *::after {
+    margin:0;
+    padding:0;
+    border:0;
     box-sizing: border-box;
-}
+  }
 
-
-a {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  a{
     -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;
-    -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+  }
 }
 
+/* ----------------- Utilities & component styles ----------------- */
+@layer utilities {
+  /* keep exactly your class name so component need not change */
+  .skill-head {
+    @apply w-[95%] fixed;
+  }
 
-.carousel {
-    padding-right: 70px;
-    margin: auto;
+  .carousel {
+    @apply mx-auto relative pr-[70px];
     --_diameter: var(--carousel-diameter);
     --_radius: calc(var(--_diameter) / 2);
     --_item-width: var(--carousel-item-width);
@@ -58,33 +60,32 @@ a {
     perspective-origin: var(--carousel-3d-perspective-origin);
     width: var(--_diameter);
     height: var(--_diameter);
-}
+  }
 
-@media only screen and (max-width: 48rem) {
+  /* Responsive scale like original */
+  @media only screen and (max-width: 48rem) {
     .carousel {
-        --_diameter: calc(var(--carousel-diameter) * 0.75);
-        --_item-width: calc(var(--carousel-item-width) * 0.75);
-        --_item-height: calc(var(--carousel-item-height) * 0.75);
+      --_diameter: calc(var(--carousel-diameter) * 0.75);
+      --_item-width: calc(var(--carousel-item-width) * 0.75);
+      --_item-height: calc(var(--carousel-item-height) * 0.75);
     }
-}
-
-@media only screen and (max-width: 32rem) {
+  }
+  @media only screen and (max-width: 32rem) {
     .carousel {
-        --_diameter: calc(var(--carousel-diameter) * 0.6);
-        --_item-width: calc(var(--carousel-item-width) * 0.6);
-        --_item-height: calc(var(--carousel-item-height) * 0.6);
+      --_diameter: calc(var(--carousel-diameter) * 0.6);
+      --_item-width: calc(var(--carousel-item-width) * 0.6);
+      --_item-height: calc(var(--carousel-item-height) * 0.6);
     }
-}
-
-@media only screen and (max-width: 16rem) {
+  }
+  @media only screen and (max-width: 16rem) {
     .carousel {
-        --_diameter: calc(var(--carousel-diameter) * 0.25);
-        --_item-width: calc(var(--carousel-item-width) * 0.25);
-        --_item-height: calc(var(--carousel-item-height) * 0.25);
+      --_diameter: calc(var(--carousel-diameter) * 0.25);
+      --_item-width: calc(var(--carousel-item-width) * 0.25);
+      --_item-height: calc(var(--carousel-item-height) * 0.25);
     }
-}
+  }
 
-.carousel .carousel-control-button {
+  .carousel .carousel-control-button {
     --_width: var(--carousel-control-button-width);
     --_height: var(--carousel-control-button-height);
     z-index: 1;
@@ -94,75 +95,41 @@ a {
     opacity: 0.2;
     transition: opacity var(--carousel-transition-duration) var(--carousel-transition-ease);
     position: absolute;
-}
+  }
+  .carousel .carousel-control-button:hover { opacity: 0.4; }
 
-.carousel .carousel-control-button:hover {
-    opacity: 0.4;
-}
-
-.carousel .carousel-control-button:has(input:checked) {
-    opacity: 0.8;
-}
-
-.carousel .carousel-control-button input {
+  .carousel .carousel-control-button input{
     -webkit-appearance: none;
     appearance: none;
     opacity: 0;
     width: 100%;
     height: 100%;
     cursor: pointer;
-}
+  }
 
-.carousel .carousel-control-button.left {
+  .carousel .carousel-control-button.left {
     clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
     top: calc(var(--_radius) - var(--_height) / 2);
     left: 0;
-}
+  }
 
-.carousel:has(.carousel-control-button.left input:checked) {
-    --carousel-direction-animation-play-state: running;
-}
-
-.carousel .carousel-control-button.right {
+  .carousel .carousel-control-button.right {
     clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
     top: calc(var(--_radius) - var(--_height) / 2);
     right: 0;
-}
+  }
 
-.carousel:has(.carousel-control-button.right input:checked) {
-    --carousel-direction-animation-play-state: paused;
-}
-
-.carousel .carousel-rotation-direction {
+  /* rotation-direction wrapper — respects the CSS var for direction */
+  .carousel .carousel-rotation-direction {
     --_direction-animation-play-state: var(--carousel-direction-animation-play-state);
     --_z: calc(var(--_radius) * -1);
     transform: translateZ(var(--_z));
     transform-style: preserve-3d;
     animation: carousel-rotation-reverse calc(var(--carousel-animation-duration) / 2) reverse linear infinite var(--_direction-animation-play-state);
     transition: all var(--carousel-transition-duration) var(--carousel-transition-ease);
-}
+  }
 
-@keyframes carousel-rotation-reverse {
-    from {
-        transform: translateZ(var(--_z)) rotateY(0deg);
-    }
-
-    to {
-        transform: translateZ(var(--_z)) rotateY(360deg);
-    }
-}
-
-@keyframes carousel-rotation-normal {
-    from {
-        transform: rotateY(0deg);
-    }
-
-    to {
-        transform: rotateY(360deg);
-    }
-}
-
-.carousel .carousel-item-wrapper {
+  .carousel .carousel-item-wrapper {
     transform-style: inherit;
     width: inherit;
     height: inherit;
@@ -170,16 +137,18 @@ a {
     position: relative;
     animation: carousel-rotation-normal var(--carousel-animation-duration) normal linear infinite var(--carousel-animation-play-state);
     transition: all var(--carousel-transition-duration) var(--carousel-transition-ease);
-}
+  }
 
-.carousel .carousel-rotation-direction:has(.carousel-item:hover) {
+  /* pause when hover inside the rotation-direction */
+  .carousel .carousel-rotation-direction:has(.carousel-item:hover) {
     --carousel-animation-play-state: paused;
     --_direction-animation-play-state: paused;
-}
+  }
 
-.carousel .carousel-item {
+  .carousel .carousel-item {
     --_width: var(--_item-width);
     --_height: var(--_item-height);
+    /* IMPORTANT: rotation depends on --_num-elements and --_index set inline by React */
     --_rotation: calc(360 / var(--_num-elements) * var(--_index) * 1deg);
     left: calc(var(--_radius) - var(--_item-width) / 2);
     top: calc(var(--_radius) - var(--_item-height) / 2);
@@ -190,14 +159,15 @@ a {
     transition: all var(--carousel-transition-duration) var(--carousel-transition-ease);
     box-shadow: 0 0 var(--carousel-item-glow-size) transparent;
     position: absolute;
-}
+  }
 
-.carousel .carousel-item:hover {
+  .carousel .carousel-item:hover {
     box-shadow: 0 0 var(--carousel-item-glow-size) rgb(var(--carousel-item-glow-color-rgb));
     transform: rotateY(var(--_rotation)) translateZ(calc(var(--_radius) * var(--carousel-item-hover-effect)));
-}
+  }
 
-.carousel .carousel-item a {
+  /* The <a> uses the inline CSS var --_image-url set by the React inline style */
+  .carousel .carousel-item a {
     display: block;
     width: inherit;
     height: inherit;
@@ -208,17 +178,17 @@ a {
     background-position: center;
     background-size: cover;
     transition: filter var(--carousel-transition-duration) var(--carousel-transition-ease);
-}
+  }
 
-
-.carousel .carousel-item::before {
+  /* reflection layer */
+  .carousel .carousel-item::before {
     content: '';
     width: inherit;
     height: inherit;
     background-color: rgba(var(--carousel-item-empty-color-rgb), 0.5);
     background-image:
-        linear-gradient(to top, rgba(var(--carousel-bg-color-rgb), 0.25) 0%, rgba(var(--carousel-bg-color-rgb), 1.0) 75%),
-        var(--_image-url);
+      linear-gradient(to top, rgba(var(--carousel-bg-color-rgb), 0.25) 0%, rgba(var(--carousel-bg-color-rgb), 1.0) 75%),
+      var(--_image-url);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -229,13 +199,13 @@ a {
     transform-origin: center bottom;
     transform: rotateX(90deg) rotateZ(180deg) rotateY(180deg);
     position: absolute;
-}
+  }
 
-.carousel .carousel-item:hover::before {
+  .carousel .carousel-item:hover::before {
     filter: blur(var(--carousel-item-reflection-blur));
-}
+  }
 
-.carousel .carousel-ground {
+  .carousel .carousel-ground {
     --_width: var(--_diameter);
     --_height: var(--_diameter);
     --_rotation: 90deg;
@@ -249,48 +219,27 @@ a {
     opacity: 0.5;
     transition: opacity var(--carousel-transition-duration) var(--carousel-transition-ease);
     position: absolute;
-}
+  }
 
-.carousel .carousel-item-wrapper:has(.carousel-item:hover) .carousel-ground {
+  .carousel .carousel-item-wrapper:has(.carousel-item:hover) .carousel-ground {
     opacity: 0.75;
-}
+  }
 
+  /* External social links (kept as original) */
+  #source-link { top: 120px; }
+  #source-link>i { color: rgb(94, 106, 210); }
+  #yt-link { top: 65px; }
+  #yt-link>i { color: rgb(219, 31, 106); }
+  #Fund-link { top: 10px; }
+  #Fund-link>i { color: rgb(255, 251, 0); }
 
-/* -- External Social Link CSS Styles -- */
-
-#source-link {
-    top: 120px;
-}
-
-#source-link>i {
-    color: rgb(94, 106, 210);
-}
-
-#yt-link {
-    top: 65px;
-}
-
-#yt-link>i {
-    color: rgb(219, 31, 106);
-
-}
-
-#Fund-link {
-    top: 10px;
-}
-
-#Fund-link>i {
-    color: rgb(255, 251, 0);
-
-}
-
-.meta-link {
+  .meta-link {
     align-items: center;
     backdrop-filter: blur(3px);
     background-color: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 6px;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.1);
     cursor: pointer;
     display: inline-flex;
     gap: 5px;
@@ -300,22 +249,27 @@ a {
     text-decoration: none;
     transition: background-color 600ms, border-color 600ms;
     z-index: 10000;
-}
+  }
 
-.meta-link:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
+  .meta-link:hover {
+    background-color: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
 
-.meta-link>i,
-.meta-link>span {
-    height: 20px;
-    line-height: 20px;
-}
-
-.meta-link>span {
+  .meta-link>i, .meta-link>span { height: 20px; line-height: 20px; }
+  .meta-link>span {
     color: white;
     font-family: "Rubik", sans-serif;
     transition: color 600ms;
+  }
 }
 
+/* ----------------- Keyframes (unchanged) ----------------- */
+@keyframes carousel-rotation-reverse {
+  from { transform: translateZ(calc(var(--_radius) * -1)) rotateY(0deg); }
+  to   { transform: translateZ(calc(var(--_radius) * -1)) rotateY(360deg); }
+}
+@keyframes carousel-rotation-normal {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
+}
